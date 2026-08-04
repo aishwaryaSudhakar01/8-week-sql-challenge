@@ -12,14 +12,14 @@ Eight case studies, eight industries: restaurant analytics, delivery logistics, 
 
 | # | Case Study | Scenario | Status | Solution |
 |---|---|---|---|---|
-| 1 | [Danny's Diner](https://8weeksqlchallenge.com/case-study-1/) | A Japanese restaurant wants to understand visiting patterns, spend, and favourite menu items to improve customer experience and evaluate a loyalty program. | 🚧 In Progress | [View →](./case-study-1/README.md) |
-| 2 | [Pizza Runner](https://8weeksqlchallenge.com/case-study-2/) | A pizza delivery startup ("Uber for pizza") needs data cleaned and analysed to help direct runners and optimise operations. | ⏳ Upcoming | — |
-| 3 | [Foodie-Fi](https://8weeksqlchallenge.com/case-study-3/) | A Netflix-style streaming service for cooking shows wants subscription data analysed to guide future investment and feature decisions. | ⏳ Upcoming | — |
-| 4 | [Data Bank](https://8weeksqlchallenge.com/case-study-4/) | A digital bank that also sells distributed data storage needs customer, transaction, and balance data analysed to forecast storage needs. | ⏳ Upcoming | — |
-| 5 | [Data Mart](https://8weeksqlchallenge.com/case-study-5/) | An online supermarket needs the sales impact of a June 2020 sustainable packaging change quantified across region, platform, and customer segment. | ⏳ Upcoming | — |
-| 6 | [Clique Bait](https://8weeksqlchallenge.com/case-study-6/) | An online seafood retailer wants funnel fallout rates calculated: how customers drop off between visiting, viewing, adding to cart, and purchasing. | ⏳ Upcoming | — |
-| 7 | [Balanced Tree Clothing Co.](https://8weeksqlchallenge.com/case-study-7/) | A clothing retailer needs transaction, product performance, and revenue analysis to support monthly stakeholder reporting. | ⏳ Upcoming | — |
-| 8 | [Fresh Segments](https://8weeksqlchallenge.com/case-study-8/) | A digital marketing agency needs aggregated ad-click interest data analysed to profile a client's customer base. | ⏳ Upcoming | — |
+| 1 | [Danny's Diner](https://8weeksqlchallenge.com/case-study-1/) | A Japanese restaurant wants to understand visiting patterns, spend, and favourite menu items to improve customer experience and evaluate a loyalty program. | 🚧&nbsp;In&nbsp;Progress | [View →](./case-study-1/README.md) |
+| 2 | [Pizza Runner](https://8weeksqlchallenge.com/case-study-2/) | A pizza delivery startup ("Uber for pizza") needs data cleaned and analysed to help direct runners and optimise operations. | ⏳&nbsp;Upcoming | — |
+| 3 | [Foodie-Fi](https://8weeksqlchallenge.com/case-study-3/) | A Netflix-style streaming service for cooking shows wants subscription data analysed to guide future investment and feature decisions. | ⏳&nbsp;Upcoming | — |
+| 4 | [Data Bank](https://8weeksqlchallenge.com/case-study-4/) | A digital bank that also sells distributed data storage needs customer, transaction, and balance data analysed to forecast storage needs. | ⏳&nbsp;Upcoming | — |
+| 5 | [Data Mart](https://8weeksqlchallenge.com/case-study-5/) | An online supermarket needs the sales impact of a June 2020 sustainable packaging change quantified across region, platform, and customer segment. | ⏳&nbsp;Upcoming | — |
+| 6 | [Clique Bait](https://8weeksqlchallenge.com/case-study-6/) | An online seafood retailer wants funnel fallout rates calculated: how customers drop off between visiting, viewing, adding to cart, and purchasing. | ⏳&nbsp;Upcoming | — |
+| 7 | [Balanced Tree Clothing Co.](https://8weeksqlchallenge.com/case-study-7/) | A clothing retailer needs transaction, product performance, and revenue analysis to support monthly stakeholder reporting. | ⏳&nbsp;Upcoming | — |
+| 8 | [Fresh Segments](https://8weeksqlchallenge.com/case-study-8/) | A digital marketing agency needs aggregated ad-click interest data analysed to profile a client's customer base. | ⏳&nbsp;Upcoming | — |
 
 ## Repo Structure
 
