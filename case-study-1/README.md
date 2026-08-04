@@ -1,5 +1,7 @@
 # Case Study #1: Danny's Diner
 
+<p align="center"><img src="./images/Image1.png" width="400" alt="Danny's Diner"></p>
+
 [Case study brief →](https://8weeksqlchallenge.com/case-study-1/)
 
 Danny's Diner wants to understand customer visiting patterns, spend, and favourite menu items, and to evaluate whether a loyalty program is worth building.
@@ -53,7 +55,7 @@ LEFT JOIN `dannys_diner.members` mem
   ON s.customer_id = mem.customer_id;
 ```
 
-![Setup](./images/1.png)
+<img src="./images/1.png" width="800" alt="Setup">
 
 **Why a materialized view, not a plain view:** BigQuery materialized views can only reference base tables directly. No nested views, no window functions, no `ORDER BY`, restricted join patterns. This join fits inside those limits.
 
@@ -72,7 +74,7 @@ GROUP BY customer_id
 ORDER BY customer_id;
 ```
 
-![Q1 output](./images/2.png)
+<img src="./images/2.png" width="800" alt="Q1 output">
 
 | customer_id | total_amount |
 |---|---|
@@ -91,7 +93,7 @@ GROUP BY customer_id
 ORDER BY customer_id;
 ```
 
-![Q2 output](./images/3.png)
+<img src="./images/3.png" width="800" alt="Q2 output">
 
 | customer_id | visit_count |
 |---|---|
@@ -120,7 +122,7 @@ FROM cte
 WHERE rn = 1;
 ```
 
-![Q3 output](./images/4.png)
+<img src="./images/4.png" width="800" alt="Q3 output">
 
 | customer_id | product_name | order_date |
 |---|---|---|
@@ -155,7 +157,7 @@ FROM cte
 WHERE rn = 1;
 ```
 
-![Q4 output](./images/5.png)
+<img src="./images/5.png" width="800" alt="Q4 output">
 
 | product_name | order_count |
 |---|---|
@@ -185,7 +187,7 @@ FROM cte
 WHERE rn = 1;
 ```
 
-![Q5 output](./images/6.png)
+<img src="./images/6.png" width="800" alt="Q5 output">
 
 | customer_id | product_name | purchase_count |
 |---|---|---|
@@ -215,7 +217,7 @@ FROM cte
 WHERE rn = 1;
 ```
 
-![Q6 output](./images/7.png)
+<img src="./images/7.png" width="800" alt="Q6 output">
 
 | customer_id | product_name |
 |---|---|
@@ -243,7 +245,7 @@ FROM cte
 WHERE rn = 1;
 ```
 
-![Q7 output](./images/8.png)
+<img src="./images/8.png" width="800" alt="Q7 output">
 
 | customer_id | product_name |
 |---|---|
@@ -263,7 +265,7 @@ GROUP BY customer_id
 ORDER BY customer_id;
 ```
 
-![Q8 output](./images/9.png)
+<img src="./images/9.png" width="800" alt="Q8 output">
 
 | customer_id | order_count | total_amount |
 |---|---|---|
@@ -284,7 +286,7 @@ GROUP BY customer_id
 ORDER BY customer_id;
 ```
 
-![Q9 output](./images/10.png)
+<img src="./images/10.png" width="800" alt="Q9 output">
 
 | customer_id | total_points |
 |---|---|
@@ -310,7 +312,7 @@ GROUP BY customer_id
 ORDER BY customer_id;
 ```
 
-![Q10 output](./images/11.png)
+<img src="./images/11.png" width="800" alt="Q10 output">
 
 | customer_id | total_points |
 |---|---|
@@ -334,7 +336,7 @@ SELECT
 FROM `dannys_diner.sales_menu_members`;
 ```
 
-![Bonus: Rank All The Things output](./images/12.png)
+<img src="./images/12.png" width="800" alt="Bonus: Rank All The Things output">
 
 ## Full script
 
