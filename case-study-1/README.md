@@ -1,12 +1,30 @@
 # Case Study #1: Danny's Diner
 
-<p align="center"><img src="./images/Image1.png" width="400" alt="Danny's Diner"></p>
-
-[Case study brief →](https://8weeksqlchallenge.com/case-study-1/)
+🔗 [Case study brief](https://8weeksqlchallenge.com/case-study-1/)
 
 Danny's Diner wants to understand customer visiting patterns, spend, and favourite menu items, and to evaluate whether a loyalty program is worth building.
 
-**Jump to:** [ERD](#erd) · [Setup](#setup-a-materialized-view-for-the-recurring-join) · [Q1](#1-what-is-the-total-amount-each-customer-spent-at-the-restaurant) · [Q2](#2-how-many-days-has-each-customer-visited-the-restaurant) · [Q3](#3-what-was-the-first-item-from-the-menu-purchased-by-each-customer) · [Q4](#4-what-is-the-most-purchased-item-on-the-menu-and-how-many-times-was-it-purchased-by-all-customers) · [Q5](#5-which-item-was-the-most-popular-for-each-customer) · [Q6](#6-which-item-was-purchased-first-by-the-customer-after-they-became-a-member) · [Q7](#7-which-item-was-purchased-just-before-the-customer-became-a-member) · [Q8](#8-what-is-the-total-items-and-amount-spent-for-each-member-before-they-became-a-member) · [Q9](#9-if-each-1-spent-equates-to-10-points-and-sushi-has-a-2x-points-multiplier-how-many-points-would-each-customer-have) · [Q10](#10-in-the-first-week-after-a-customer-joins-the-program-including-their-join-date-they-earn-2x-points-on-all-items-not-just-sushi-what-are-the-total-points-for-a-and-b-by-the-end-of-january) · [Bonus](#bonus-rank-all-the-things)
+<table align="center">
+<tr>
+<td align="center"><a href="#erd">ERD</a></td>
+<td align="center"><a href="#setup-a-materialized-view-for-the-recurring-join">Setup</a></td>
+<td align="center"><a href="#1-what-is-the-total-amount-each-customer-spent-at-the-restaurant">Q1</a></td>
+<td align="center"><a href="#2-how-many-days-has-each-customer-visited-the-restaurant">Q2</a></td>
+<td align="center"><a href="#3-what-was-the-first-item-from-the-menu-purchased-by-each-customer">Q3</a></td>
+<td align="center"><a href="#4-what-is-the-most-purchased-item-on-the-menu-and-how-many-times-was-it-purchased-by-all-customers">Q4</a></td>
+<td align="center"><a href="#5-which-item-was-the-most-popular-for-each-customer">Q5</a></td>
+</tr>
+<tr>
+<td align="center"><a href="#6-which-item-was-purchased-first-by-the-customer-after-they-became-a-member">Q6</a></td>
+<td align="center"><a href="#7-which-item-was-purchased-just-before-the-customer-became-a-member">Q7</a></td>
+<td align="center"><a href="#8-what-is-the-total-items-and-amount-spent-for-each-member-before-they-became-a-member">Q8</a></td>
+<td align="center"><a href="#9-if-each-1-spent-equates-to-10-points-and-sushi-has-a-2x-points-multiplier-how-many-points-would-each-customer-have">Q9</a></td>
+<td align="center"><a href="#10-in-the-first-week-after-a-customer-joins-the-program-including-their-join-date-they-earn-2x-points-on-all-items-not-just-sushi-what-are-the-total-points-for-a-and-b-by-the-end-of-january">Q10</a></td>
+<td align="center"><a href="#bonus-rank-all-the-things">Bonus</a></td>
+</tr>
+</table>
+
+<p align="center"><img src="./images/Image1.png" width="400" alt="Danny's Diner"></p>
 
 ## ERD
 
@@ -55,11 +73,9 @@ LEFT JOIN `dannys_diner.members` mem
   ON s.customer_id = mem.customer_id;
 ```
 
-<img src="./images/1.png" width="800" alt="Setup">
-
 **Why a materialized view, not a plain view:** BigQuery materialized views can only reference base tables directly. No nested views, no window functions, no `ORDER BY`, restricted join patterns. This join fits inside those limits.
 
-**Honest caveat:** this is a static 15-row dataset. It never changes, so the refresh never triggers. No real performance win over a plain view, just extra storage. Used it anyway to show the pattern correctly.
+**Honest caveat:** this is a static 15-row dataset. It never changes, so the refresh never triggers. No real performance win over a plain view here, just extra storage. Used it anyway to show the pattern correctly.
 
 ## Questions
 
@@ -74,13 +90,13 @@ GROUP BY customer_id
 ORDER BY customer_id;
 ```
 
-<img src="./images/2.png" width="800" alt="Q1 output">
-
 | customer_id | total_amount |
 |---|---|
 | A | 76 |
 | B | 74 |
 | C | 36 |
+
+**Result:** A and B spend roughly the same ($76 vs $74), C spends about half. Build the loyalty program around A/B's habits, C isn't the target customer yet.
 
 ### 2. How many days has each customer visited the restaurant?
 
@@ -93,13 +109,13 @@ GROUP BY customer_id
 ORDER BY customer_id;
 ```
 
-<img src="./images/3.png" width="800" alt="Q2 output">
-
 | customer_id | visit_count |
 |---|---|
 | A | 4 |
 | B | 6 |
 | C | 2 |
+
+**Result:** B visits 6 times to A's 4, but they spend about the same total, B just spends less per visit. A frequency-based reward would favor B; a spend-based one would favor A, worth deciding which behavior to reward.
 
 ### 3. What was the first item from the menu purchased by each customer?
 
@@ -122,13 +138,13 @@ FROM cte
 WHERE rn = 1;
 ```
 
-<img src="./images/4.png" width="800" alt="Q3 output">
-
 | customer_id | product_name | order_date |
 |---|---|---|
 | A | sushi | 2021-01-01 |
 | B | curry | 2021-01-01 |
 | C | ramen | 2021-01-01 |
+
+**Result:** all 3 customers' first orders were different dishes (sushi, curry, ramen). No single item drives first visits, so a "first order free" promo shouldn't be built around one dish.
 
 **The tie:** A ordered sushi and curry both on 2021-01-01. C ordered ramen twice on the same day. No natural tiebreaker exists in the data.
 
@@ -157,11 +173,11 @@ FROM cte
 WHERE rn = 1;
 ```
 
-<img src="./images/5.png" width="800" alt="Q4 output">
-
 | product_name | order_count |
 |---|---|
 | ramen | 8 |
+
+**Result:** ramen leads with 8 orders, more than sushi and curry combined. Keep ramen stocked first if supply ever gets tight.
 
 ### 5. Which item was the most popular for each customer?
 
@@ -187,8 +203,6 @@ FROM cte
 WHERE rn = 1;
 ```
 
-<img src="./images/6.png" width="800" alt="Q5 output">
-
 | customer_id | product_name | purchase_count |
 |---|---|---|
 | A | ramen | 3 |
@@ -196,6 +210,8 @@ WHERE rn = 1;
 | B | curry | 2 |
 | B | ramen | 2 |
 | C | ramen | 3 |
+
+**Result:** ramen is the clear favorite for A and C, but B is split evenly across all three dishes. A single "recommended for you" item won't work for B.
 
 ### 6. Which item was purchased first by the customer after they became a member?
 
@@ -217,14 +233,14 @@ FROM cte
 WHERE rn = 1;
 ```
 
-<img src="./images/7.png" width="800" alt="Q6 output">
-
 | customer_id | product_name |
 |---|---|
 | A | curry |
 | B | sushi |
 
 C never joined the loyalty program, so C has no rows here.
+
+**Result:** neither A nor B ordered their own favorite dish as their first purchase after joining. Membership shifts what people try, not just how often they show up, worth testing a "welcome dish" recommendation.
 
 ### 7. Which item was purchased just before the customer became a member?
 
@@ -245,12 +261,12 @@ FROM cte
 WHERE rn = 1;
 ```
 
-<img src="./images/8.png" width="800" alt="Q7 output">
-
 | customer_id | product_name |
 |---|---|
 | A | sushi |
 | B | sushi |
+
+**Result:** both A and B ordered sushi right before joining. Small sample, but worth testing sushi as a signup trigger in a follow-up promo.
 
 ### 8. What is the total items and amount spent for each member before they became a member?
 
@@ -265,12 +281,12 @@ GROUP BY customer_id
 ORDER BY customer_id;
 ```
 
-<img src="./images/9.png" width="800" alt="Q8 output">
-
 | customer_id | order_count | total_amount |
 |---|---|---|
 | A | 2 | 25 |
 | B | 3 | 40 |
+
+**Result:** both A and B were already ordering multiple times before they joined (A: 2 orders/$25, B: 3 orders/$40). The program rewards existing loyalty, it isn't what's creating it, so acquisition and retention need separate strategies.
 
 ### 9. If each $1 spent equates to 10 points and sushi has a 2x points multiplier, how many points would each customer have?
 
@@ -286,13 +302,13 @@ GROUP BY customer_id
 ORDER BY customer_id;
 ```
 
-<img src="./images/10.png" width="800" alt="Q9 output">
-
 | customer_id | total_points |
 |---|---|
 | A | 860 |
 | B | 940 |
 | C | 360 |
+
+**Result:** B ends up with more points than A (940 vs 860) despite spending less overall, the sushi multiplier is doing the work. If Danny wants points to track actual spend, the multiplier needs a cap.
 
 ### 10. In the first week after a customer joins the program (including their join date), they earn 2x points on all items, not just sushi. What are the total points for A and B by the end of January?
 
@@ -312,14 +328,14 @@ GROUP BY customer_id
 ORDER BY customer_id;
 ```
 
-<img src="./images/11.png" width="800" alt="Q10 output">
-
 | customer_id | total_points |
 |---|---|
 | A | 1370 |
 | B | 820 |
 
 C is excluded. C never joined, and this question only applies to members.
+
+**Result:** the first-week bonus flips the leaderboard again, A jumps to 1,370 points against B's 820. The bonus is effective at driving early engagement, but it's also volatile enough to swing rankings on its own.
 
 ## Bonus: Rank All The Things
 
@@ -336,7 +352,7 @@ SELECT
 FROM `dannys_diner.sales_menu_members`;
 ```
 
-<img src="./images/12.png" width="800" alt="Bonus: Rank All The Things output">
+**Result:** one table with pre-member orders ranked separately from member orders. Gives a clean base for any future loyalty analysis without rebuilding the join.
 
 ## Full script
 
