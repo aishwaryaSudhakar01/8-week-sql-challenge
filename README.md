@@ -39,4 +39,4 @@ The 8 Week SQL Challenge is a free, self-paced series of business case studies c
 
 ## Notes
 
-Danny Ma provides each case's schema visually (ERD images) rather than as downloadable files, so table structures here were transcribed from the official case study pages before writing any queries. Each case's README includes the schema/ERD plus a screenshot of every query's output alongside the query itself, so results are visible without running anything.
+Danny Ma provides each case's schema visually (ERD images) rather than as downloadable files, so table structures here were transcribed from the official case study pages before writing any queries. Each case's README includes the schema/ERD plus the queries and their outputs, so results are visible without running anything.
