@@ -28,7 +28,7 @@ Each case study lives in its own folder:
 ```
 case-study-N/
 ├── README.md          # schema/ERD, each question with its query + output screenshot, and findings
-├── solution.sql       # full runnable SQL for the case all queries)
+├── solution.sql       # full runnable SQL for the case (all queries)
 ├── datasets/          # raw source data (CSVs) transcribed from Danny Ma's schema images
 └── images/            # screenshots referenced in README.md
 ```
